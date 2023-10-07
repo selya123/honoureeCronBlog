@@ -3,6 +3,7 @@ import { version } from './package.json'
 export const TOKEN = 'HON'
 export const IS_HIVE = true
 export const APP_DOMAIN = 'https://honouree.com'
+// export const APP_DOMAIN = 'http://localhost:8080'
 export const APP_TITLE = 'Honouree'
 export const APP = `honouree/${version}`
 export const IMAGES_CDN = 'https://images.hive.blog/'
