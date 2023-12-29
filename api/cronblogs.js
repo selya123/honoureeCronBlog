@@ -4,11 +4,10 @@ import moment from 'moment';
 
 const router = express.Router();
 const Schema = mongoose.Schema;
-const connection_string = process.env.MONGO_URL;
 
 const connectToDatabase = async () => {
   try {
-    await mongoose.connect(connection_string);
+    await mongoose.connect(process.env.MONGO_URL);
     console.log('Connected to MongoDB');
   } catch (error) {
   console.error('Error connecting to the database:', error);
