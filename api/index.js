@@ -7,6 +7,7 @@ import cors from 'cors'
 import { differenceInMinutes } from 'date-fns'
 import { Client, cryptoUtils, utils, Signature } from '@hiveio/dhive'
 import * as config from '../config'
+import cronblogsRouter from './cronblogs';
 
 const app = express()
 
@@ -41,6 +42,7 @@ app.use(cookieSession({
 app.use(cookieParser())
 
 app.use(cors())
+app.use('/api/cronblogs', cronblogsRouter);
 
 app.get('/', (req, res) => {
   res.json({
