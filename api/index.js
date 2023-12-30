@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cookieSession from 'cookie-session'
 import axios from 'axios'
@@ -30,8 +29,8 @@ const fetchPost = async ({ author, permlink }) => {
   return data[config.TOKEN]
 }
 
-app.set('trust proxy', 1)
-app.use(bodyParser.json())
+app.set('trust proxy', 1);
+app.use(express.json());  // Use built-in feature of Express, an alternaive to bodyParser
 app.use(cookieSession({
   name: 'session',
   secret: process.env.SESSION_SECRET || 'mySuperSecretSessionSecret',
