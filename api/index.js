@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cookieSession from 'cookie-session'
 import axios from 'axios'
@@ -8,6 +7,7 @@ import cors from 'cors'
 import { differenceInMinutes } from 'date-fns'
 import { Client, cryptoUtils, utils, Signature } from '@hiveio/dhive'
 import * as config from '../config'
+import cronblogsRouter from './cronblogs';
 
 const app = express()
 
@@ -30,8 +30,8 @@ const fetchPost = async ({ author, permlink }) => {
   return data[config.TOKEN]
 }
 
-app.set('trust proxy', 1)
-app.use(bodyParser.json())
+app.set('trust proxy', 1);
+app.use(express.json());  // Use built-in feature of Express, an alternaive to bodyParser
 app.use(cookieSession({
   name: 'session',
   secret: process.env.SESSION_SECRET || 'mySuperSecretSessionSecret',
@@ -42,6 +42,7 @@ app.use(cookieSession({
 app.use(cookieParser())
 
 app.use(cors())
+app.use('/api/cronblogs', cronblogsRouter);
 
 app.get('/', (req, res) => {
   res.json({
